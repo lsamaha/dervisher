@@ -1,0 +1,15 @@
+language: python
+python:
+- '2.7'
+install: pip install --allow-external argparse -r requirements.txt
+script: nosetests
+deploy:
+  provider: pypi
+  user: lsamaha
+  password:
+    secure: J5YWQymM/gDcZi+I6JC3kjkCG4aDbRy6Y2ncjf/Ih+cX5jWoIoorl/VO3CqmUMaZF7sVs+To/2NxccJkKf3lC4ZKM3Qs+YAtlOuTZjJTWC0ttRFjP/TEmctImZgOkUQ9eCV1cEaiDg7zsJH8YQTUzDhknKM8oq+4u/3YwePN/IA=
+  on:
+    tags: true
+    repo: lsamaha/dervisher
+    all_branches: true
+
