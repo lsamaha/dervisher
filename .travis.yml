@@ -7,9 +7,6 @@ deploy:
   provider: pypi
   user: lsamaha
   password:
-    secure: J5YWQymM/gDcZi+I6JC3kjkCG4aDbRy6Y2ncjf/Ih+cX5jWoIoorl/VO3CqmUMaZF7sVs+To/2NxccJkKf3lC4ZKM3Qs+YAtlOuTZjJTWC0ttRFjP/TEmctImZgOkUQ9eCV1cEaiDg7zsJH8YQTUzDhknKM8oq+4u/3YwePN/IA=
+    secure: JrD5l0dq7MXDnonTxsKkz03EI8GOdY7ybwiWbJ+e7+39XkoHqC9Pp8PDAT8KAu4uIX6aFUxBz+Oc8hwJkXwabeuJcB5xOSF8E7HCxF5vSYn7v863efiQe68cLDSgksQxpQ0+08udCk0Eui6Ix5yz9gAOoTtSsSy/mPiCrn3zhg4=
   on:
-    tags: true
     repo: lsamaha/dervisher
-    all_branches: true
-
