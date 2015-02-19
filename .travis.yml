@@ -10,3 +10,5 @@ deploy:
     secure: JrD5l0dq7MXDnonTxsKkz03EI8GOdY7ybwiWbJ+e7+39XkoHqC9Pp8PDAT8KAu4uIX6aFUxBz+Oc8hwJkXwabeuJcB5xOSF8E7HCxF5vSYn7v863efiQe68cLDSgksQxpQ0+08udCk0Eui6Ix5yz9gAOoTtSsSy/mPiCrn3zhg4=
   on:
     repo: lsamaha/dervisher
+    all_branches: true
+
