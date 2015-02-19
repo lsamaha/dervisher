@@ -18,7 +18,7 @@ class Whirling(Dervisher):
     count = 0
 
     def start(self, rpm):
-        Dervisher.start(self)
+        Dervisher.start(self, rpm)
         self.timer = WhirlTimer(rpm, self.whirl)
         self.timer.start()
         self.whirling = True
