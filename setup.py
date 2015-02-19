@@ -1,4 +1,5 @@
 import os
+from uuid import uuid4
 from setuptools import setup
 from pip.req import parse_requirements
 
