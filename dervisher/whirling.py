@@ -1,9 +1,10 @@
 #!/bin/bash
 __author__ = 'lsamaha'
 
-import sys, signal, time
+import sys, signal, time, random, uuid
 from threading import Timer
 from dervisher import Dervisher
+from words import Words
 from event import Event
 from post import Post
 from stream import Stream
@@ -15,6 +16,8 @@ class Whirling(Dervisher):
     mimi = None
     timer = None
     dance = ['back','forth']
+    words = Words()
+    max_events_per_uow = 200
     count = 0
 
     def start(self, rpm):
@@ -29,8 +32,14 @@ class Whirling(Dervisher):
 
     def whirl(self):
         step = self.dance[self.count % len(self.dance)]
-        self.post.event(Event(event_class='start', event_type='whirl', subtype=step, env='dev', product=self.product))
-        self.post.event(Event(event_class='complete', event_type='whirl', subtype=step, env='dev', product=self.product))
+        uow_uid = str(uuid.uuid4())
+        self.post.event(Event(event_class='start', event_type='whirl',
+                              subtype=step, env='dev', product=self.product, uow_uid=uow_uid))
+        for _ in range(random.randrange(0, self.max_events_per_uow)):
+            self.post.event(Event(event_class=self.words.any_verb(), event_type=self.words.any_noun(),
+                              subtype=self.words.any_adverb(), env='dev', product=self.product, uow_uid=uow_uid))
+        self.post.event(Event(event_class='complete', event_type='whirl',
+                              subtype=step, env='dev', product=self.product, uow_uid=uow_uid))
         self.count += 1
 
     def sig(self, signal, frame):

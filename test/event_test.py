@@ -2,6 +2,7 @@ __author__ = 'lsamaha'
 
 import unittest2 as unittest
 import json
+import time
 from dervisher.event import Event
 
 
@@ -11,6 +12,7 @@ class EventTest(unittest.TestCase):
     """
 
     def test_json(self):
+        startmillis = int(time.time() * 1000)
         e = Event(event_class='start', event_type='service', subtype='mimi', product='foo', env='dev', pretty=True)
         data = e.tojson()
         e2 = json.loads(data)
@@ -20,6 +22,8 @@ class EventTest(unittest.TestCase):
         self.assertEquals(e.__dict__['subtype'], e2['subtype'])
         self.assertEquals(e.__dict__['product'], e2['product'])
         self.assertEquals(e.__dict__['env'], e2['env'])
+        self.assertIsNotNone(e.__dict__['at'])
+        self.assertTrue(int(e.__dict__['at']) >= startmillis)
 
 if __name__ == '__main__':
     unittest.main()
