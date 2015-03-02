@@ -1,8 +1,6 @@
 __author__ = 'lsamaha'
 
-from stream import Stream
 from shard import Shard
-from boto.kinesis.layer1 import KinesisConnection
 
 
 class Post(object):
@@ -10,7 +8,7 @@ class Post(object):
     stream = None
     shard = None
 
-    def __init__(self, stream=Stream(conn=KinesisConnection()), shard=Shard()):
+    def __init__(self, stream, shard=Shard()):
         self.stream = stream
         self.shard = shard
 

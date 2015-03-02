@@ -26,12 +26,16 @@ class Stream(object):
         except ResourceInUseException, e:
             pass
         except ResourceNotFoundException, e:
+            print("creating stream with %d shards" % (shard_count))
             conn.create_stream(stream_name=stream_name, shard_count=shard_count)
             self.wait_till_active(self.timeout, self.retry_pause)
 
     def put(self, key, data):
         if self.ready():
+            start = time.time() * 1000
             self.conn.put_record(stream_name=self.stream_name, data=data, partition_key=key)
+            dur = (time.time() * 1000) - start
+            print("put time %d ms" % (dur))
         else:
             raise StreamNotReadyException("%s:%s" % (self.stream_name, self.status()))
 

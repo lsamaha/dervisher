@@ -17,7 +17,7 @@ class Whirling(Dervisher):
     timer = None
     dance = ['back','forth']
     words = Words()
-    max_events_per_uow = 200
+    max_events_per_uow = 10
     count = 0
 
     def start(self, rpm):
@@ -72,11 +72,12 @@ class WhirlTimer():
 
 def main():
     if len(sys.argv) < 2:
-        print "usage: whirl rpm"
+        print "usage: whirl rpm shards"
     else:
         rpm = int(sys.argv[1])
+        shards = int(sys.argv[2])
         print "a dervisher starts whirling at %d rpm" % rpm
-        dervisher = Whirling(product = 'mimi', post=Post(stream=Stream(KinesisConnection())))
+        dervisher = Whirling(product = 'mimi', post=Post(stream=Stream(KinesisConnection(), shard_count=shards)))
         dervisher.start(rpm)
         signal.signal(signal.SIGINT, dervisher.sig)
         while(dervisher.whirling):
