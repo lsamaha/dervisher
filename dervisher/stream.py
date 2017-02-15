@@ -6,26 +6,22 @@ import time
 
 class Stream(object):
 
-    conn = None
-    stream_name = None
     active = 'ACTIVE'
-    retry_pause = 1
-    timeout = -1
 
     def __init__(self, conn, stream_name='dervish', shard_count=1, timeout=-1, retry_pause=1):
         self.conn = conn
         self.stream_name = stream_name
         self.timeout = timeout
         self.retry_pause = retry_pause
-        print "finding stream %s" % stream_name
+        print("finding stream %s" % stream_name)
         try:
-            if self.status() == self.active:
+            if self.status() == Stream.active:
                 return
             else:
                 self.wait_till_active(self.timeout, self.retry_pause)
-        except ResourceInUseException, e:
+        except ResourceInUseException as e:
             pass
-        except ResourceNotFoundException, e:
+        except ResourceNotFoundException as e:
             print("creating stream with %d shards" % (shard_count))
             conn.create_stream(stream_name=stream_name, shard_count=shard_count)
             self.wait_till_active(self.timeout, self.retry_pause)
@@ -45,18 +41,18 @@ class Stream(object):
         return description.get('StreamStatus')
 
     def wait_till_active(self, timeout=-1, retry_pause=1):
-        print "waiting",
+        print("waiting",end='')
         start = time.time()
         while not self.ready():
             if timeout >= 0 and time.time() > start + timeout:
                 raise StreamTimeoutException
             time.sleep(retry_pause)
-            print ".",
-        print "OK"
-        print "stream is active"
+            print(".", end='')
+        print("OK")
+        print("stream is active")
 
     def ready(self):
-        return self.status() == self.active
+        return self.status() == Stream.active
 
 
 class StreamNotReadyException(Exception):

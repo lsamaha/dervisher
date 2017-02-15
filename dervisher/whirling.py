@@ -12,13 +12,14 @@ from boto.kinesis.layer1 import KinesisConnection
 
 class Whirling(Dervisher):
 
-    whirling = False
-    mimi = None
-    timer = None
     dance = ['back','forth']
-    words = Words()
     max_events_per_uow = 10
-    count = 0
+
+    def __init__(self):
+        self.whirling = False
+        self.timer = None
+        self.count = 0
+        self.words = Words()
 
     def start(self, rpm):
         Dervisher.start(self, rpm)
@@ -31,11 +32,11 @@ class Whirling(Dervisher):
         Dervisher.stop(self)
 
     def whirl(self):
-        step = self.dance[self.count % len(self.dance)]
+        step = Whirling.dance[self.count % len(Whirling.dance)]
         uow_uid = str(uuid.uuid4())
         self.post.event(Event(event_class='start', event_type='whirl',
                               subtype=step, env='dev', product=self.product, uow_uid=uow_uid))
-        for _ in range(random.randrange(0, self.max_events_per_uow)):
+        for _ in range(random.randrange(0, Whirling.max_events_per_uow)):
             self.post.event(Event(event_class=self.words.any_verb(), event_type=self.words.any_noun(),
                               subtype=self.words.any_adverb(), env='dev', product=self.product, uow_uid=uow_uid))
         self.post.event(Event(event_class='complete', event_type='whirl',
@@ -43,7 +44,7 @@ class Whirling(Dervisher):
         self.count += 1
 
     def sig(self, signal, frame):
-        print "received signal %s" % signal
+        print("received signal %s" % signal)
         self.stop()
 
 class WhirlTimer():
@@ -72,11 +73,11 @@ class WhirlTimer():
 
 def main():
     if len(sys.argv) < 2:
-        print "usage: whirl rpm shards"
+        print("usage: whirl rpm shards")
     else:
         rpm = int(sys.argv[1])
         shards = int(sys.argv[2])
-        print "a dervisher starts whirling at %d rpm" % rpm
+        print("a dervisher starts whirling at %d rpm" % rpm)
         dervisher = Whirling(product = 'mimi', post=Post(stream=Stream(KinesisConnection(), shard_count=shards)))
         dervisher.start(rpm)
         signal.signal(signal.SIGINT, dervisher.sig)

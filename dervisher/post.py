@@ -5,9 +5,6 @@ from shard import Shard
 
 class Post(object):
 
-    stream = None
-    shard = None
-
     def __init__(self, stream, shard=Shard()):
         self.stream = stream
         self.shard = shard

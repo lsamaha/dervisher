@@ -35,7 +35,7 @@ class StreamTest(unittest.TestCase):
         try:
             stream = Stream(conn=conn, stream_name=name, shard_count=shards, timeout=0, retry_pause=0)
             self.assertFalse('Stream creation should timeout since mock is not ready on first attempt', True)
-        except StreamTimeoutException, e:
+        except StreamTimeoutException as e:
             thrown = e
             pass
         self.assertIsNotNone(thrown)

@@ -4,12 +4,6 @@ import random
 
 class Words(object):
 
-    path = None
-    nouns = []
-    verbs = []
-    adjectives = []
-    adverbs = []
-
     def __init__(self, path='samples'):
         self.path = path
         self.nouns = self.load_words('nouns')

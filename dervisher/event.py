@@ -5,16 +5,6 @@ import time
 
 class Event(object):
 
-    event_class = None
-    event_type = None
-    subtype = None
-    product = None
-    env = None
-    uow_uid = None
-    pretty = None
-    at = None
-    event_version = None
-
     def __init__(
             self, event_class, event_type, subtype, product, env, uow_uid=None, event_version = '0.1', pretty=False):
         self.event_class = event_class
@@ -22,6 +12,7 @@ class Event(object):
         self.subtype = subtype
         self.product = product
         self.env = env
+        self.uow_uid = uow_uid
         self.pretty = pretty
         self.at = int(time.time() * 1000)
         self.event_version = event_version

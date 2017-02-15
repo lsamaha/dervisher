@@ -5,9 +5,6 @@ from event import Event
 
 class Dervisher(object):
 
-    product = None
-    post = None
-
     def __init__(self, product, post):
         self.product = product
         self.post = post
