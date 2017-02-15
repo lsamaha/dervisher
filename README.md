@@ -4,7 +4,7 @@ Demonstrates use of AWS kinesis and dynamodb for application events.
 
 ## About
 
-A dervisher is a python package used to how applications should post events to kinesis for storage and evaluation by
+Dervisher is a Python 3 package used to how applications should post events to kinesis for storage and evaluation by
 the chain of event consumers defined in the dervish GitHub project.
 
 ## Getting Started
