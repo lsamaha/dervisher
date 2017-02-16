@@ -3,11 +3,11 @@ __author__ = 'lsamaha'
 
 import sys, signal, time, random, uuid
 from threading import Timer
-from dervisher import Dervisher
-from words import Words
-from event import Event
-from post import Post
-from stream import Stream
+from dervisher.dervisher import Dervisher
+from dervisher.words import Words
+from dervisher.event import Event
+from dervisher.post import Post
+from dervisher.stream import Stream
 from boto.kinesis.layer1 import KinesisConnection
 
 class Whirling(Dervisher):

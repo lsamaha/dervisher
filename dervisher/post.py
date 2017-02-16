@@ -1,6 +1,6 @@
 __author__ = 'lsamaha'
 
-from shard import Shard
+from dervisher.shard import Shard
 
 
 class Post(object):

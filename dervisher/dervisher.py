@@ -1,6 +1,6 @@
 __author__ = 'lsamaha'
 
-from event import Event
+from dervisher.event import Event
 
 
 class Dervisher(object):
