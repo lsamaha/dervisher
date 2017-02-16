@@ -9,15 +9,15 @@ the chain of event consumers defined in the dervish GitHub project.
 
 ## Getting Started
 
-A dervisher is created by installing the dervisher python package and calling the entry point whirl and providing a
-numeric rotation per minute argument.
+A dervisher is created by installing the dervisher python package and calling the module, providing a
+name, a numeric rotation per minute argument, and a shard count for the stream being created.
 
 ## Example
 
 ```bash
 pip install dervisher
-dervish
-usage: dervisher rpm
+dervisher
+Required: [name] [rpm] [shards]
 ```
 
 ## Result
@@ -29,15 +29,15 @@ The result of invoking the dervisher is:
 
 ## Example Output
 ```bash
-dervish 20
+dervisher 20
 finding stream dervish
 a dervisher starts whirling at 20 rpm
-posting {"env": "dev", "event_class": "start", "event_type": "service", "pretty": false, "product": "mimi", "subtype": "whirl"}
-posting {"env": "dev", "event_class": "start", "event_type": "whirl", "pretty": false, "product": "mimi", "subtype": "back"}
-posting {"env": "dev", "event_class": "complete", "event_type": "whirl", "pretty": false, "product": "mimi", "subtype": "back"}
-posting {"env": "dev", "event_class": "start", "event_type": "whirl", "pretty": false, "product": "mimi", "subtype": "forth"}
-posting {"env": "dev", "event_class": "complete", "event_type": "whirl", "pretty": false, "product": "mimi", "subtype": "forth"}
-posting {"env": "dev", "event_class": "stop", "event_type": "service", "pretty": false, "product": "mimi", "subtype": "whirl"}
+posting {"env": "dev", "event_class": "start", "event_type": "service", "pretty": false, "name": "mimi", "subtype": "whirl"}
+posting {"env": "dev", "event_class": "start", "event_type": "whirl", "pretty": false, "name": "mimi", "subtype": "back"}
+posting {"env": "dev", "event_class": "complete", "event_type": "whirl", "pretty": false, "name": "mimi", "subtype": "back"}
+posting {"env": "dev", "event_class": "start", "event_type": "whirl", "pretty": false, "name": "mimi", "subtype": "forth"}
+posting {"env": "dev", "event_class": "complete", "event_type": "whirl", "pretty": false, "name": "mimi", "subtype": "forth"}
+posting {"env": "dev", "event_class": "stop", "event_type": "service", "pretty": false, "name": "mimi", "subtype": "whirl"}
 ```
 
 ## Do It Yourself
@@ -45,6 +45,6 @@ posting {"env": "dev", "event_class": "stop", "event_type": "service", "pretty":
 By reviewing the docs and the whirling class, it should be easy to see how to generate new streams with new app events.
 
 ```python
-dervisher = Dervisher(product = 'mimi', post=Post(stream=Stream(KinesisConnection())))
-dervisher.post.event(Event(event_class='start', event_type='whirl', subtype='forth', env='dev', product=self.product))
+dervisher = Dervisher(name='mimi', post=Post(stream=Stream(KinesisConnection())))
+dervisher.post.event(Event(event_class='start', event_type='whirl', subtype='forth', env='dev', name=self.name))
 ```

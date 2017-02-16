@@ -6,11 +6,11 @@ import time
 class Event(object):
 
     def __init__(
-            self, event_class, event_type, subtype, product, env, uow_uid=None, event_version = '0.1', pretty=False):
+            self, event_class, event_type, subtype, name, env, uow_uid=None, event_version ='0.1', pretty=False):
         self.event_class = event_class
         self.event_type = event_type
         self.subtype = subtype
-        self.product = product
+        self.name = name
         self.env = env
         self.uow_uid = uow_uid
         self.pretty = pretty

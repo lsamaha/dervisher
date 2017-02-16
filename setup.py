@@ -11,7 +11,7 @@ def read(fname):
 
 setup(
     name = "dervisher",
-    version = "0.0.11",
+    version = "0.0.12",
     author = "Luke Samaha",
     author_email = "lwsamaha@gmail.com",
     description = ("Demonstrates use of AWS kinesis and dynamodb for application events."),

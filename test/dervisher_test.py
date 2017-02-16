@@ -11,7 +11,7 @@ class DervisherTest(unittest.TestCase):
     """
     def test_start(self):
         post = MockPost()
-        d = Dervisher(product='fifi', post=post)
+        d = Dervisher(name='fifi', post=post)
         d.start(30)
         self.assertEquals(1, post.event_count)
         self.assertEquals('start', post.last_event.event_class)
